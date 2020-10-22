@@ -124,7 +124,7 @@ void Parser::parse(std::string html)
         }
 
 
-        if(!htmlPart.empty())
+        if(!htmlPart.empty()) 
             addLink(htmlPart);
 
     }

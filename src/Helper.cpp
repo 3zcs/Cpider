@@ -28,13 +28,13 @@ void start(std::string url, std::string path)
 
     // parse
     Parser parser(requester.getBuffer(), url);
-
+    
     if (!parser.getLinks().empty())
     {
         std::lock_guard<std::mutex> lck(mutexInsert);
         std::vector<Link> tmp;
         tmp = parser.getLinks();
-
+        
         for (Link link : tmp)
         {
             if (linksMap.count(link.getPath()) == 0)
@@ -90,7 +90,7 @@ void parseLikes(int depth, std::string url)
 
 void handleResult(std::string domain){
     std::unique_ptr<ResultHandler> Rhandler(new CustomResultHandler(linksMap));
-    
+
     // start thread and pass promise as argument
     std::thread twrite(writeToFile, std::move(prms), Rhandler.get(),domain);
     std::thread tprint(print, Rhandler.get());

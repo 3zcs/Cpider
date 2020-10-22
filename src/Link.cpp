@@ -1,6 +1,6 @@
 #include "Link.h"
 
-Link::Link(std::string path, bool internal) : _path(new char[path.length()]), _internal(internal)
+Link::Link(std::string path, bool internal) : _path(new char[path.length() + 1]), _internal(internal)
 {
   std::strcpy(_path, path.c_str());
 }
@@ -11,7 +11,7 @@ Link::~Link()
 }
 
 // copy constructor
-Link::Link(Link const &source) : _path(new char[std::strlen(source._path)]),
+Link::Link(Link const &source) : _path(new char[std::strlen(source._path)+1]),
                            _internal(source.isInternal()),
                            _visited(source.isVisted())
 {
